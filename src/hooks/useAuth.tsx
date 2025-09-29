@@ -40,35 +40,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const handleSessionChange = async (session: Session | null) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+
+      if (session?.user) {
+        setLoading(true);
+        try {
+          await fetchUserProfile(session.user.id);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setProfile(null);
+        setUserRole(null);
+        setLoading(false);
+      }
+    };
+
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          setTimeout(() => {
-            fetchUserProfile(session.user.id);
-          }, 0);
-        } else {
-          setProfile(null);
-          setUserRole(null);
-        }
-        
-        setLoading(false);
+      (_event, session) => {
+        handleSessionChange(session);
       }
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        fetchUserProfile(session.user.id);
-      }
-      
-      setLoading(false);
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      await handleSessionChange(session);
     });
 
     return () => subscription.unsubscribe();
@@ -85,10 +84,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (profileError && profileError.code !== 'PGRST116') {
         console.error('Error fetching profile:', profileError);
+        setProfile(null);
+        setUserRole(null);
         return;
       }
 
-      setProfile(profileData);
+      setProfile(profileData ?? null);
 
       // Fetch user role
       const { data: roleData, error: roleError } = await supabase
@@ -99,12 +100,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (roleError && roleError.code !== 'PGRST116') {
         console.error('Error fetching role:', roleError);
+        setUserRole(null);
         return;
       }
 
       setUserRole(roleData?.role || null);
     } catch (error) {
       console.error('Error in fetchUserProfile:', error);
+      setProfile(null);
+      setUserRole(null);
     }
   };
 
