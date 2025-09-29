@@ -11,8 +11,10 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
   const { user, userRole, loading } = useAuth();
   const navigate = useNavigate();
 
+  const isRolePending = Boolean(allowedRoles && user && !userRole);
+
   useEffect(() => {
-    if (!loading) {
+    if (!loading && !isRolePending) {
       if (!user) {
         navigate('/auth');
         return;
@@ -23,9 +25,9 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
         return;
       }
     }
-  }, [user, userRole, loading, navigate, allowedRoles]);
+  }, [user, userRole, loading, navigate, allowedRoles, isRolePending]);
 
-  if (loading) {
+  if (loading || isRolePending) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-pulse-medical">
