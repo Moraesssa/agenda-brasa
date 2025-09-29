@@ -2,41 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* AgendarBrasil Design System - Medical & Health Platform
+All colors MUST be HSL. Designed for trust, accessibility and professionalism.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Medical Blue - Professional and trustworthy */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
 
+    /* Card and surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Medical Blue for trust and reliability */
+    --primary: 210 82% 51%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 210 82% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Soft medical teal */
+    --secondary: 174 41% 93%;
+    --secondary-foreground: 174 84% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Health green for positive actions */
+    --health: 142 71% 45%;
+    --health-foreground: 0 0% 100%;
+    --health-light: 142 52% 96%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted tones for supporting elements */
+    --muted: 210 17% 95%;
+    --muted-foreground: 215 16% 47%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Accent - Warm teal for highlights */
+    --accent: 174 31% 91%;
+    --accent-foreground: 174 84% 20%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Alert colors for medical context */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --emergency: 0 84% 60%;
+    --emergency-foreground: 0 0% 100%;
 
-    --radius: 0.5rem;
+    /* Destructive actions */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders and inputs */
+    --border: 210 16% 87%;
+    --input: 210 16% 87%;
+    --ring: 210 82% 51%;
+
+    /* Design tokens */
+    --radius: 0.75rem;
+
+    /* Medical gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 82% 51%), hsl(174 41% 45%));
+    --gradient-health: linear-gradient(135deg, hsl(142 71% 45%), hsl(174 41% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 82% 51%) 0%, hsl(174 41% 45%) 50%, hsl(142 71% 45%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(210 20% 98%), hsl(210 17% 95%));
+
+    /* Medical shadows for depth and trust */
+    --shadow-medical: 0 10px 25px -5px hsl(210 82% 51% / 0.1);
+    --shadow-card: 0 4px 12px -2px hsl(210 40% 8% / 0.08);
+    --shadow-button: 0 2px 8px -2px hsl(210 82% 51% / 0.2);
+
+    /* Professional animations */
+    --transition-medical: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.2s ease-in-out;
 
     --sidebar-background: 0 0% 98%;
 
