@@ -26,14 +26,14 @@ const Header = () => {
           </a>
         </nav>
 
-        <div className="flex items-center space-x-2">
-          <Button variant="ghost" size="sm">
-            <LogIn className="h-4 w-4 mr-2" />
-            Entrar
+        <div className="flex items-center space-x-1 sm:space-x-2">
+          <Button variant="ghost" size="sm" className="text-xs sm:text-sm px-2 sm:px-4">
+            <LogIn className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">Entrar</span>
           </Button>
-          <Button variant="medical" size="sm">
-            <UserPlus className="h-4 w-4 mr-2" />
-            Cadastrar
+          <Button variant="medical" size="sm" className="text-xs sm:text-sm px-2 sm:px-4">
+            <UserPlus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">Cadastrar</span>
           </Button>
         </div>
       </div>
