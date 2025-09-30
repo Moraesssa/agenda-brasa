@@ -3,8 +3,15 @@ import { Calendar, Shield, Smartphone, Users } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
 
 const Hero = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = typeof document !== "undefined" ? document.getElementById(sectionId) : null;
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-subtle">
+    <section id="agenda" className="relative min-h-screen flex items-center bg-gradient-subtle">
       <div className="container mx-auto px-4 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -19,11 +26,21 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="medical" size="lg" className="text-lg px-8 py-6">
+              <Button
+                variant="medical"
+                size="lg"
+                className="text-lg px-8 py-6"
+                onClick={() => scrollToSection("agenda")}
+              >
                 <Calendar className="h-5 w-5 mr-2" />
                 Agendar Consulta
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6">
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-lg px-8 py-6"
+                onClick={() => scrollToSection("profissionais")}
+              >
                 Sou Profissional
               </Button>
             </div>
