@@ -14,6 +14,153 @@ export type Database = {
   }
   public: {
     Tables: {
+      lab_results: {
+        Row: {
+          collected_at: string | null
+          created_at: string
+          description: string | null
+          id: string
+          patient_id: string
+          provider_id: string | null
+          result_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          collected_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          patient_id: string
+          provider_id?: string | null
+          result_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          collected_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          patient_id?: string
+          provider_id?: string | null
+          result_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_results_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lab_results_provider_id_fkey"
+            columns: ["provider_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patient_consultations: {
+        Row: {
+          consultation_date: string
+          created_at: string
+          follow_up_actions: string | null
+          id: string
+          patient_id: string
+          provider_id: string | null
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          consultation_date: string
+          created_at?: string
+          follow_up_actions?: string | null
+          id?: string
+          patient_id: string
+          provider_id?: string | null
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          consultation_date?: string
+          created_at?: string
+          follow_up_actions?: string | null
+          id?: string
+          patient_id?: string
+          provider_id?: string | null
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_consultations_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_consultations_provider_id_fkey"
+            columns: ["provider_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patient_notes: {
+        Row: {
+          author_id: string
+          content: string
+          created_at: string
+          entry_date: string
+          id: string
+          mood: string | null
+          patient_id: string
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          content: string
+          created_at?: string
+          entry_date?: string
+          id?: string
+          mood?: string | null
+          patient_id: string
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          content?: string
+          created_at?: string
+          entry_date?: string
+          id?: string
+          mood?: string | null
+          patient_id?: string
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_notes_author_id_fkey"
+            columns: ["author_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_notes_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -56,6 +203,122 @@ export type Database = {
         }
         Relationships: []
       }
+      reminder_notifications: {
+        Row: {
+          channel: string
+          created_at: string
+          id: string
+          patient_id: string
+          payload: Json | null
+          reminder_id: string
+          sent_at: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          channel: string
+          created_at?: string
+          id?: string
+          patient_id: string
+          payload?: Json | null
+          reminder_id: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          id?: string
+          patient_id?: string
+          payload?: Json | null
+          reminder_id?: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reminder_notifications_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reminder_notifications_reminder_id_fkey"
+            columns: ["reminder_id"]
+            referencedRelation: "reminder_schedules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reminder_schedules: {
+        Row: {
+          active: boolean
+          created_at: string
+          days_of_week: number[] | null
+          dosage: string | null
+          id: string
+          instructions: string | null
+          last_triggered_at: string | null
+          medication_name: string
+          next_trigger_at: string | null
+          notify_email: boolean
+          notify_push: boolean
+          patient_id: string
+          recurrence_interval_minutes: number | null
+          schedule_type: Database["public"]["Enums"]["reminder_schedule_type"]
+          start_time: string
+          timezone: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          days_of_week?: number[] | null
+          dosage?: string | null
+          id?: string
+          instructions?: string | null
+          last_triggered_at?: string | null
+          medication_name: string
+          next_trigger_at?: string | null
+          notify_email?: boolean
+          notify_push?: boolean
+          patient_id: string
+          recurrence_interval_minutes?: number | null
+          schedule_type?: Database["public"]["Enums"]["reminder_schedule_type"]
+          start_time: string
+          timezone?: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          days_of_week?: number[] | null
+          dosage?: string | null
+          id?: string
+          instructions?: string | null
+          last_triggered_at?: string | null
+          medication_name?: string
+          next_trigger_at?: string | null
+          notify_email?: boolean
+          notify_push?: boolean
+          patient_id?: string
+          recurrence_interval_minutes?: number | null
+          schedule_type?: Database["public"]["Enums"]["reminder_schedule_type"]
+          start_time?: string
+          timezone?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reminder_schedules_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -96,6 +359,7 @@ export type Database = {
     }
     Enums: {
       app_role: "paciente" | "medico" | "admin"
+      reminder_schedule_type: "once" | "daily" | "weekly" | "custom"
     }
     CompositeTypes: {
       [_ in never]: never

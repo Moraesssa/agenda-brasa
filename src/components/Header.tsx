@@ -107,6 +107,12 @@ const Header = () => {
                     </div>
                   </div>
                 </DropdownMenuLabel>
+                {userRole === 'paciente' && (
+                  <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                    <Calendar className="mr-2 h-4 w-4" />
+                    <span>Meu painel</span>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="mr-2 h-4 w-4" />
