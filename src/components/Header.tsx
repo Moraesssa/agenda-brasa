@@ -21,6 +21,10 @@ const Header = () => {
     navigate('/');
   };
 
+  const goToSchedule = () => {
+    navigate('/schedule');
+  };
+
   const getUserInitials = () => {
     if (profile?.first_name && profile?.last_name) {
       return `${profile.first_name[0]}${profile.last_name[0]}`.toUpperCase();
@@ -65,9 +69,13 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#agenda" className="text-sm font-medium text-muted-foreground hover:text-primary transition-smooth">
+          <button
+            type="button"
+            onClick={goToSchedule}
+            className="text-sm font-medium text-muted-foreground hover:text-primary transition-smooth"
+          >
             Agendar Consulta
-          </a>
+          </button>
           <a href="#profissionais" className="text-sm font-medium text-muted-foreground hover:text-primary transition-smooth">
             Para Profissionais
           </a>
@@ -77,6 +85,15 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center space-x-1 sm:space-x-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="hidden sm:flex text-xs sm:text-sm px-2 sm:px-4"
+            onClick={goToSchedule}
+          >
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+            <span className="hidden sm:inline">Agendar</span>
+          </Button>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
