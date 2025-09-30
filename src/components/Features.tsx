@@ -72,6 +72,15 @@ const Features = () => {
           </p>
         </div>
 
+        <div id="sobre" className="max-w-3xl mx-auto text-center mb-20 space-y-4">
+          <h3 className="text-2xl font-bold">Sobre o AgendarBrasil</h3>
+          <p className="text-muted-foreground">
+            Conectamos pacientes, profissionais e clínicas em uma única plataforma intuitiva.
+            Com tecnologia de ponta, oferecemos ferramentas para otimizar o cuidado em saúde e
+            garantir experiências memoráveis em cada consulta.
+          </p>
+        </div>
+
         {/* Para Pacientes */}
         <div className="mb-20">
           <div className="text-center mb-12">
@@ -97,7 +106,7 @@ const Features = () => {
         </div>
 
         {/* Para Profissionais */}
-        <div className="mb-20">
+        <div id="profissionais" className="mb-20">
           <div className="text-center mb-12">
             <h3 className="text-2xl font-bold mb-4">Para Profissionais de Saúde</h3>
             <p className="text-muted-foreground">Otimize seu consultório e melhore o atendimento</p>
