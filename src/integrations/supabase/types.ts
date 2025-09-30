@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          patient_id: string
+          provider_id: string
+          slot_id: string
+          status: Database["public"]["Enums"]["appointment_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          patient_id: string
+          provider_id: string
+          slot_id: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          patient_id?: string
+          provider_id?: string
+          slot_id?: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      availability_slots: {
+        Row: {
+          created_at: string
+          end_time: string
+          id: string
+          provider_id: string
+          start_time: string
+          status: Database["public"]["Enums"]["slot_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          end_time: string
+          id?: string
+          provider_id: string
+          start_time: string
+          status?: Database["public"]["Enums"]["slot_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          end_time?: string
+          id?: string
+          provider_id?: string
+          start_time?: string
+          status?: Database["public"]["Enums"]["slot_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -56,6 +119,42 @@ export type Database = {
         }
         Relationships: []
       }
+      providers: {
+        Row: {
+          city: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          profile_id: string
+          specialty: string | null
+          state: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          profile_id: string
+          specialty?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          profile_id?: string
+          specialty?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -86,6 +185,19 @@ export type Database = {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"]
       }
+      book_appointment: {
+        Args: {
+          notes?: string | null
+          slot_id: string
+        }
+        Returns: Database["public"]["Tables"]["appointments"]["Row"]
+      }
+      cancel_appointment: {
+        Args: {
+          appointment_id: string
+        }
+        Returns: Database["public"]["Tables"]["appointments"]["Row"]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -96,6 +208,8 @@ export type Database = {
     }
     Enums: {
       app_role: "paciente" | "medico" | "admin"
+      appointment_status: "booked" | "cancelled" | "completed"
+      slot_status: "available" | "booked" | "unavailable"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -224,6 +338,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["paciente", "medico", "admin"],
+      appointment_status: ["booked", "cancelled", "completed"],
+      slot_status: ["available", "booked", "unavailable"],
     },
   },
 } as const
