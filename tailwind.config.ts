@@ -87,6 +87,7 @@ export default {
         'medical': 'var(--shadow-medical)',
         'card': 'var(--shadow-card)',
         'button': 'var(--shadow-button)',
+        'elegant': '0 12px 24px -12px rgba(15, 23, 42, 0.35), 0 20px 40px -20px rgba(15, 23, 42, 0.3)',
       },
       transitionTimingFunction: {
         'medical': 'var(--transition-medical)',
