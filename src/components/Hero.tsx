@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, Shield, Smartphone, Users } from "lucide-react";
 import heroImage from "@/assets/hero-medical.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (sectionId: string) => {
     const element = typeof document !== "undefined" ? document.getElementById(sectionId) : null;
     if (element) {
@@ -30,7 +33,7 @@ const Hero = () => {
                 variant="medical"
                 size="lg"
                 className="text-lg px-8 py-6"
-                onClick={() => scrollToSection("agenda")}
+                onClick={() => navigate("/schedule")}
               >
                 <Calendar className="h-5 w-5 mr-2" />
                 Agendar Consulta
